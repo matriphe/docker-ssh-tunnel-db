@@ -46,7 +46,10 @@ docker build -t matriphe/tunnel:mysql1 \
 To use the image, just run as usual. For example above, run this command.
 
 ```console
-docker run -d -p 3333:3306 matriphe/tunnel:mysql1 
+docker run -d \
+    --name=mysql1 \
+    -p 3333:3306 \
+    matriphe/tunnel:mysql1 
 ```
 
 Now you can access MySQL on 10.1.2.3 from your host via tunnel.
@@ -60,5 +63,13 @@ mysql -u mysqlusername -p -P 3333 -h 127.0.0.1
 If you don't want to rebuild images, you can use *environment* on running. For example, with same image, we want to connect to other server located on 192.168.1.123 with user `newuser` and password `newsecret` on SSH port `2222`. We can use this command.
 
 ```console
-docker run -d --rm -p 3333:3306 -e SSH_HOST=192.168.1.123 -e SSH_USER=newuser -e SSH_PASSWORD=newsecret -e SSH_PORT=2222 -e DB_HOST=localhost matriphe/tunnel:mysql1 
+docker run -d \
+    --name=mysql2 \
+    -p 3333:3306 \
+    -e SSH_HOST=192.168.1.123 \
+    -e SSH_USER=newuser \
+    -e SSH_PASSWORD=newsecret \
+    -e SSH_PORT=2222 \
+    -e DB_HOST=localhost \
+    matriphe/tunnel:mysql1 
 ```
