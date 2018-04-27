@@ -6,7 +6,7 @@ Create a tunnel to connect to remote databases (MySQL, SQL Server, PostgreSQL).
 
 > It used `sshpass` that considered as insecure because exposing plain password. Use this with your own risk!
 
-## Build Images
+## Build Image
 
 Provide this parameter on build you don't need to feed *environment* variables on running. Or if you don't want to rebuild the image for specific purpose, you cann pass it by passing *environment* variables.
 
@@ -14,7 +14,8 @@ Provide this parameter on build you don't need to feed *environment* variables o
 docker build -t vendor/name:version \
     --build-arg SSH_HOST=tunnel_ssh_host \
     --build-arg SSH_USER=tunnel_ssh_user \
-    --build-arg SSH_PASSWORD=tunnel_ssh_password \ --build-arg DB_HOST=tunneled_db_host \
+    --build-arg SSH_PASSWORD=tunnel_ssh_password \ 
+    --build-arg DB_HOST=tunneled_db_host \
     --build-arg DB_PORT=tunneled_db_host \
     .
 ```
